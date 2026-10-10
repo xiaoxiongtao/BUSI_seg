@@ -1,0 +1,18 @@
+# ===== 深度学习框架 =====
+# 若需 GPU 加速，请到 https://pytorch.org 按你的 CUDA 版本安装对应 torch/torchvision
+torch>=2.0.0
+torchvision>=0.15.0
+
+# ===== 数值计算与数据处理 =====
+numpy>=1.24.0
+pandas>=2.0.0
+scikit-learn>=1.2.0
+Pillow>=9.5.0
+
+# ===== 训练进度与可视化 =====
+tqdm>=4.65.0
+matplotlib>=3.7.0
+
+# ===== Jupyter Notebook =====
+jupyter>=1.0.0
+ipykernel>=6.25.0
