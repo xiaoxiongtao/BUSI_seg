@@ -1,0 +1,69 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', position: 'relative' }}>
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 8, background: '#1E4FA8' }} />
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 330, height: 670, background: '#0E3F8C' }}>
+    <Box style={{ position: 'absolute', top: 60, left: 40, width: 250, flexDirection: 'column', gap: 18 }}>
+      <Text style={{ fontSize: 20, color: '#9FB6DE', letterSpacing: 3 }}>02 检测基础</Text>
+      <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#FFFFFF', lineHeight: 1.3 }}>YOLO 核心模块拆解</Text>
+      <Box style={{ width: 56, height: 4, background: '#FFC107', marginTop: 6 }} />
+      <Text style={{ fontSize: 18, color: '#C9D7EE', lineHeight: 1.7, marginTop: 8 }}>
+        四个关键组件，决定了 YOLO 的速度与精度平衡。理解它们，就理解了绝大多数现代检测器的通用语汇。
+      </Text>
+      <Box style={{ background: 'rgba(255,255,255,0.12)', borderRadius: 10, padding: '14px 18px', marginTop: 10 }}>
+        <Text style={{ fontSize: 17, color: '#FFFFFF', lineHeight: 1.6 }}>
+          思考：这些模块同样启发了分割网络的编码器设计——卷积 + 归一化 + 激活是共同的积木。
+        </Text>
+      </Box>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', top: 56, left: 376, width: 864, flexDirection: 'column', gap: 16 }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'stretch', gap: 16, background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', padding: '16px 22px' }}>
+      <Box style={{ width: 120, justifyContent: 'center', alignItems: 'center', background: '#1E4FA8', borderRadius: 10 }}>
+        <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#FFFFFF' }}>CBS</Text>
+      </Box>
+      <Box style={{ flex: 1 }}>
+        <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#0E3F8C' }}>Conv + BatchNorm + SiLU</Text>
+        <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.55, marginTop: 6 }}>
+          最小卷积单元：k×k 卷积降维 / 下采样（stride=2 时分辨率减半），BN 稳定训练，SiLU 平滑激活。所有阶段的基本积木。
+        </Text>
+      </Box>
+    </Box>
+    <Box style={{ flexDirection: 'row', alignItems: 'stretch', gap: 16, background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', padding: '16px 22px' }}>
+      <Box style={{ width: 120, justifyContent: 'center', alignItems: 'center', background: '#1E4FA8', borderRadius: 10 }}>
+        <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#FFFFFF' }}>C2f</Text>
+      </Box>
+      <Box style={{ flex: 1 }}>
+        <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#0E3F8C' }}>跨阶段部分卷积 + 梯度流分支</Text>
+        <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.55, marginTop: 6 }}>
+          输入 split 成两半后串联多个 Bottleneck，并把每支输出都拼回通道维—— richer gradient flow，同等精度下比 C3 更少参数。
+        </Text>
+      </Box>
+    </Box>
+    <Box style={{ flexDirection: 'row', alignItems: 'stretch', gap: 16, background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', padding: '16px 22px' }}>
+      <Box style={{ width: 120, justifyContent: 'center', alignItems: 'center', background: '#1E4FA8', borderRadius: 10 }}>
+        <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#FFFFFF' }}>SPPF</Text>
+      </Box>
+      <Box style={{ flex: 1 }}>
+        <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#0E3F8C' }}>快速空间金字塔池化</Text>
+        <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.55, marginTop: 6 }}>
+          串行 3 次 5×5 MaxPool 等价于并行 5/9/13 感受野的池化，输出拼接后特征图覆盖多尺度上下文，计算量更低。
+        </Text>
+      </Box>
+    </Box>
+    <Box style={{ flexDirection: 'row', alignItems: 'stretch', gap: 16, background: '#F0F5FC', borderRadius: 12, border: '2px solid #1E4FA8', padding: '16px 22px' }}>
+      <Box style={{ width: 120, justifyContent: 'center', alignItems: 'center', background: '#0E3F8C', borderRadius: 10 }}>
+        <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#FFFFFF' }}>Detect</Text>
+      </Box>
+      <Box style={{ flex: 1 }}>
+        <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#0E3F8C' }}>Anchor-Free 解耦头 + TAL 标签分配</Text>
+        <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.55, marginTop: 6 }}>
+          分类与回归各走一条 3×3 卷积分支；直接预测 l/t/r/b 四个距离，无需预设 anchor；
+          TAL 按分类得分 × IoU 动态挑选高质量正样本，缓解框回归的监督歧义。
+        </Text>
+      </Box>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', bottom: 0, left: 0, width: 1280, height: 50, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0 40px', borderTop: '1px solid #E5E7EB', background: '#F7F9FC' }}>
+    <Text style={{ fontSize: 14, color: '#8B97A8' }}>乳腺结节智能分割 · 教学课件</Text>
+    <Text style={{ fontSize: 14, color: '#1E4FA8' }}>09 / 21</Text>
+  </Box>
+</Slide>

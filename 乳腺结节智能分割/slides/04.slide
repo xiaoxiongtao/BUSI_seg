@@ -1,0 +1,68 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', position: 'relative' }}>
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 8, background: '#1E4FA8' }} />
+  <Box style={{ position: 'absolute', top: 28, left: 40, width: 1200, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid #D6DCE5', paddingBottom: 16 }}>
+    <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#0E3F8C' }}>临床问题与任务定义：为什么需要像素级分割</Text>
+    <Box style={{ background: '#E8EFF8', borderRadius: 999, padding: '6px 18px' }}>
+      <Text style={{ fontSize: 16, color: '#1E4FA8' }}>01 任务与数据</Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', top: 110, left: 40, width: 660, flexDirection: 'column', gap: 14 }}>
+    <Box style={{ background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', padding: 16 }}>
+      <Image src="assets/malignant_pair.jpg" style={{ width: 628, height: 307, objectFit: 'cover', borderRadius: 8 }} />
+      <Box style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10, padding: '0 6px' }}>
+        <Text style={{ fontSize: 16, color: '#4A5568' }}> malignant (5) 原图：病灶边界模糊、形态不规则</Text>
+        <Text style={{ fontSize: 16, color: '#D9534F' }}>医师标注 GT mask（红色叠加）</Text>
+      </Box>
+    </Box>
+    <Box style={{ background: '#E8EFF8', borderRadius: 10, padding: '14px 20px' }}>
+      <Text style={{ fontSize: 19, color: '#0E3F8C', lineHeight: 1.55 }}>
+        同一张图，医师给出的是<strong>逐像素的病灶轮廓</strong>，而不是一个矩形框——
+        边界模糊、毛刺状的恶性病灶，矩形框无法刻画其真实形态。
+      </Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', top: 110, left: 724, width: 516, height: 548, flexDirection: 'column', gap: 16 }}>
+    <Box style={{ background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '20px 24px', flex: 1 }}>
+      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+        <Box style={{ width: 36, height: 36, background: '#1E4FA8', borderRadius: 8, justifyContent: 'center', alignItems: 'center' }}>
+          <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#FFFFFF' }}>1</Text>
+        </Box>
+        <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#0E3F8C' }}>临床痛点</Text>
+      </Box>
+      <Text style={{ fontSize: 19, color: '#4A5568', lineHeight: 1.6, marginTop: 10 }}>
+        乳腺超声是筛查一线手段，但良恶性结节的灰度表现重叠，人工勾画轮廓耗时且观察者间差异大。
+      </Text>
+    </Box>
+    <Box style={{ background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '20px 24px', flex: 1 }}>
+      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+        <Box style={{ width: 36, height: 36, background: '#1E4FA8', borderRadius: 8, justifyContent: 'center', alignItems: 'center' }}>
+          <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#FFFFFF' }}>2</Text>
+        </Box>
+        <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#0E3F8C' }}>任务定义</Text>
+      </Box>
+      <Text style={{ fontSize: 19, color: '#4A5568', lineHeight: 1.6, marginTop: 10 }}>
+        语义分割 = 对每个像素做二分类（病灶 / 背景），输出与原图等大小的概率图，阈值化后得到 mask。
+      </Text>
+    </Box>
+    <Box style={{ background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '20px 24px', flex: 1 }}>
+      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+        <Box style={{ width: 36, height: 36, background: '#0E3F8C', borderRadius: 8, justifyContent: 'center', alignItems: 'center' }}>
+          <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#FFFFFF' }}>3</Text>
+        </Box>
+        <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#0E3F8C' }}>临床价值</Text>
+      </Box>
+      <Text style={{ fontSize: 19, color: '#4A5568', lineHeight: 1.6, marginTop: 10 }}>
+        精确轮廓支撑病灶体积测量、形态学特征（毛刺、纵横比）量化与 BI-RADS 分级辅助，也可为后续随访对比提供依据。
+      </Text>
+    </Box>
+    <Box style={{ background: '#0E3F8C', borderRadius: 12, padding: '16px 24px' }}>
+      <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#FFFFFF', lineHeight: 1.5 }}>
+        本课主线：先理解"检测"（YOLO），再深入"分割"（U-Net），最后动手完成乳腺结节分割实验。
+      </Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', bottom: 0, left: 0, width: 1280, height: 50, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0 40px', borderTop: '1px solid #E5E7EB', background: '#F7F9FC' }}>
+    <Text style={{ fontSize: 14, color: '#8B97A8' }}>乳腺结节智能分割 · 教学课件</Text>
+    <Text style={{ fontSize: 14, color: '#1E4FA8' }}>04 / 21</Text>
+  </Box>
+</Slide>

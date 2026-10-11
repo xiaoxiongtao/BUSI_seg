@@ -1,0 +1,47 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', position: 'relative' }}>
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 8, background: '#1E4FA8' }} />
+  <Box style={{ position: 'absolute', top: 28, left: 40, width: 1200, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid #D6DCE5', paddingBottom: 16 }}>
+    <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#0E3F8C' }}>训练过程与预测效果可视化</Text>
+    <Box style={{ background: '#E8EFF8', borderRadius: 999, padding: '6px 18px' }}>
+      <Text style={{ fontSize: 16, color: '#1E4FA8' }}>04 实验与实操</Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', top: 106, left: 40, width: 560, flexDirection: 'column', gap: 14 }}>
+    <Box style={{ background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', padding: '12px 14px' }}>
+      <Image src="assets/curve_unetpp.jpg" style={{ width: 528, height: 422, objectFit: 'contain' }} />
+      <Text style={{ fontSize: 15, color: '#4A5568', textAlign: 'center', marginTop: 4 }}>
+        U-Net++（深度监督）100 epoch 训练曲线：Loss 收敛平稳，Dice 爬升至约 0.78（outputs/unetpp_20261010_204944/）
+      </Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', top: 106, left: 624, width: 616, flexDirection: 'column', gap: 14 }}>
+    <Box style={{ background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', padding: '12px 14px' }}>
+      <Image src="assets/sample_triptych.jpg" style={{ width: 588, height: 183, objectFit: 'contain', background: '#FFFFFF' }} />
+      <Box style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 4, padding: '0 8px' }}>
+        <Text style={{ fontSize: 15, color: '#4A5568' }}>① 输入原图</Text>
+        <Text style={{ fontSize: 15, color: '#4A5568' }}>② 医师 GT mask</Text>
+        <Text style={{ fontSize: 15, color: '#D9534F' }}>③ 网络输出与 GT 叠加</Text>
+      </Box>
+    </Box>
+    <Box style={{ background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '16px 22px' }}>
+      <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>从曲线里读出三件事</Text>
+      <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.65, marginTop: 8 }}>
+        ① 前期验证曲线剧烈震荡（第 2 轮 val_loss 一度冲到 5.3）——小数据集 + 类别不平衡的典型现象，
+        后期趋于平稳，未出现持续发散，训练配置可用；<br />
+        ② 训练 / 验证曲线基本贴合，无过拟合剪刀差，100 epoch 是合适的轮数；<br />
+        ③ Specificity 始终贴近 1.0 而 Recall 起伏大——瓶颈在"漏诊"而非"误报"。
+      </Text>
+    </Box>
+    <Box style={{ background: '#E8EFF8', borderRadius: 12, padding: '14px 22px' }}>
+      <Text style={{ fontSize: 18, color: '#0E3F8C', lineHeight: 1.6 }}>
+        <span style={{ fontWeight: 'bold' }}>观察任务（课堂互动）：</span>
+        恶性病例边界呈毛刺状、与腺体重叠，叠加图中预测轮廓在这些区域的偏差最大——
+        请思考：哪些改进（更强边界损失？更高分辨率？级联检测？）最有针对性？
+      </Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', bottom: 0, left: 0, width: 1280, height: 50, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0 40px', borderTop: '1px solid #E5E7EB', background: '#F7F9FC' }}>
+    <Text style={{ fontSize: 14, color: '#8B97A8' }}>乳腺结节智能分割 · 教学课件</Text>
+    <Text style={{ fontSize: 14, color: '#1E4FA8' }}>19 / 21</Text>
+  </Box>
+</Slide>

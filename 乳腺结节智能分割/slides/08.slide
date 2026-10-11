@@ -1,0 +1,95 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', position: 'relative' }}>
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 8, background: '#1E4FA8' }} />
+  <Box style={{ position: 'absolute', top: 28, left: 40, width: 1200, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid #D6DCE5', paddingBottom: 16 }}>
+    <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#0E3F8C' }}>YOLO 网络框架：Backbone → Neck → Head 三段式</Text>
+    <Box style={{ background: '#E8EFF8', borderRadius: 999, padding: '6px 18px' }}>
+      <Text style={{ fontSize: 16, color: '#1E4FA8' }}>02 检测基础</Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', top: 108, left: 40, width: 1200, height: 330, background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', justifyContent: 'center', alignItems: 'center' }}>
+    <svg width={1140} height={296} viewBox='0 0 1140 296'>
+      <text x={70} y={24} fontSize={16} fill='#4A5568'>输入 640×640×3</text>
+      <rect x={20} y={36} width={100} height={150} rx={8} fill='#FFFFFF' stroke='#3D7BD9' strokeWidth={2} />
+      <text x={70} y={95} fontSize={15} fill='#1E4FA8' textAnchor='middle'>超声/自然</text>
+      <text x={70} y={118} fontSize={15} fill='#1E4FA8' textAnchor='middle'>图像</text>
+      <path d='M120 111 L160 111' stroke='#3D7BD9' strokeWidth={2.5} />
+      <polygon points='160,106 170,111 160,116' fill='#3D7BD9' />
+
+      <rect x={172} y={12} width={250} height={238} rx={10} fill='#E8EFF8' stroke='#1E4FA8' strokeWidth={2.5} />
+      <text x={297} y={38} fontSize={19} fontWeight='bold' fill='#0E3F8C' textAnchor='middle'>Backbone 骨干网络</text>
+      <rect x={192} y={54} width={210} height={38} rx={6} fill='#FFFFFF' stroke='#3D7BD9' />
+      <text x={297} y={79} fontSize={15} fill='#1A2230' textAnchor='middle'>CBS：卷积 + BN + SiLU</text>
+      <rect x={192} y={102} width={210} height={38} rx={6} fill='#FFFFFF' stroke='#3D7BD9' />
+      <text x={297} y={127} fontSize={15} fill='#1A2230' textAnchor='middle'>C2f：梯度流分支 ×4 阶段</text>
+      <rect x={192} y={150} width={210} height={38} rx={6} fill='#FFFFFF' stroke='#3D7BD9' />
+      <text x={297} y={175} fontSize={15} fill='#1A2230' textAnchor='middle'>SPPF：串行 3 次 MaxPool</text>
+      <text x={297} y={222} fontSize={14} fill='#4A5568' textAnchor='middle'>逐级下采样，输出 P3/P4/P5 特征</text>
+
+      <path d='M422 111 L462 111' stroke='#3D7BD9' strokeWidth={2.5} />
+      <polygon points='462,106 472,111 462,116' fill='#3D7BD9' />
+
+      <rect x={474} y={12} width={250} height={238} rx={10} fill='#E8EFF8' stroke='#1E4FA8' strokeWidth={2.5} />
+      <text x={599} y={38} fontSize={19} fontWeight='bold' fill='#0E3F8C' textAnchor='middle'>Neck 特征融合</text>
+      <rect x={494} y={54} width={210} height={56} rx={6} fill='#FFFFFF' stroke='#3D7BD9' />
+      <text x={599} y={78} fontSize={15} fill='#1A2230' textAnchor='middle'>FPN：自顶向下</text>
+      <text x={599} y={98} fontSize={13} fill='#4A5568' textAnchor='middle'>语义信息传向浅层</text>
+      <rect x={494} y={120} width={210} height={56} rx={6} fill='#FFFFFF' stroke='#3D7BD9' />
+      <text x={599} y={144} fontSize={15} fill='#1A2230' textAnchor='middle'>PAN：自底向上</text>
+      <text x={599} y={164} fontSize={13} fill='#4A5568' textAnchor='middle'>定位信息回传深层</text>
+      <text x={599} y={222} fontSize={14} fill='#4A5568' textAnchor='middle'>PAN-FPN 多尺度融合，兼顾大小目标</text>
+
+      <path d='M724 111 L764 111' stroke='#3D7BD9' strokeWidth={2.5} />
+      <polygon points='764,106 774,111 764,116' fill='#3D7BD9' />
+
+      <rect x={776} y={12} width={230} height={238} rx={10} fill='#0E3F8C' />
+      <text x={891} y={38} fontSize={19} fontWeight='bold' fill='#FFFFFF' textAnchor='middle'>Head 检测头</text>
+      <rect x={796} y={54} width={190} height={40} rx={6} fill='rgba(255,255,255,0.14)' stroke='#9FB6DE' />
+      <text x={891} y={80} fontSize={15} fill='#FFFFFF' textAnchor='middle'>Anchor-Free 解耦头</text>
+      <rect x={796} y={104} width={190} height={34} rx={6} fill='rgba(255,255,255,0.14)' stroke='#9FB6DE' />
+      <text x={891} y={127} fontSize={14} fill='#FFFFFF' textAnchor='middle'>分类分支 (cls)</text>
+      <rect x={796} y={146} width={190} height={34} rx={6} fill='rgba(255,255,255,0.14)' stroke='#9FB6DE' />
+      <text x={891} y={169} fontSize={14} fill='#FFFFFF' textAnchor='middle'>回归分支 (box)</text>
+      <text x={891} y={222} fontSize={14} fill='#C9D7EE' textAnchor='middle'>三尺度输出 80/40/20</text>
+
+      <path d='M1006 111 L1046 111' stroke='#3D7BD9' strokeWidth={2.5} />
+      <polygon points='1046,106 1056,111 1046,116' fill='#3D7BD9' />
+
+      <rect x={1058} y={44} width={72} height={134} rx={8} fill='#FFFFFF' stroke='#FFC107' strokeWidth={2.5} />
+      <text x={1094} y={100} fontSize={15} fontWeight='bold' fill='#1A2230' textAnchor='middle'>框 +</text>
+      <text x={1094} y={124} fontSize={15} fontWeight='bold' fill='#1A2230' textAnchor='middle'>类别</text>
+    </svg>
+  </Box>
+  <Box style={{ position: 'absolute', top: 458, left: 40, width: 1200, flexDirection: 'row', gap: 20 }}>
+    <Box style={{ flex: 1, background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', padding: '18px 22px', height: 160 }}>
+      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+        <Box style={{ width: 34, height: 34, background: '#1E4FA8', borderRadius: 8, justifyContent: 'center', alignItems: 'center' }}><Text style={{ fontSize: 16, fontWeight: 'bold', color: '#FFFFFF' }}>A</Text></Box>
+        <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#0E3F8C' }}>Backbone：提特征</Text>
+      </Box>
+      <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.6, marginTop: 10 }}>
+        卷积堆叠逐级下采样（8/16/32 倍），C2f 增强梯度流，SPPF 以极小代价扩大感受野。
+      </Text>
+    </Box>
+    <Box style={{ flex: 1, background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', padding: '18px 22px', height: 160 }}>
+      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+        <Box style={{ width: 34, height: 34, background: '#1E4FA8', borderRadius: 8, justifyContent: 'center', alignItems: 'center' }}><Text style={{ fontSize: 16, fontWeight: 'bold', color: '#FFFFFF' }}>B</Text></Box>
+        <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#0E3F8C' }}>Neck：融尺度</Text>
+      </Box>
+      <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.6, marginTop: 10 }}>
+        FPN 把深层语义传给浅层，PAN 把浅层定位细节传回深层，让大结节与小结节都有对应尺度的特征。
+      </Text>
+    </Box>
+    <Box style={{ flex: 1, background: '#F0F5FC', borderRadius: 12, border: '1px solid #D6DCE5', padding: '18px 22px', height: 160 }}>
+      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+        <Box style={{ width: 34, height: 34, background: '#0E3F8C', borderRadius: 8, justifyContent: 'center', alignItems: 'center' }}><Text style={{ fontSize: 16, fontWeight: 'bold', color: '#FFFFFF' }}>C</Text></Box>
+        <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#0E3F8C' }}>Head：出结果</Text>
+      </Box>
+      <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.6, marginTop: 10 }}>
+        解耦头把分类与回归分开；Anchor-Free 直接预测中心点到框边的距离，配合 TAL 动态分配正样本。
+      </Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', bottom: 0, left: 0, width: 1280, height: 50, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0 40px', borderTop: '1px solid #E5E7EB', background: '#F7F9FC' }}>
+    <Text style={{ fontSize: 14, color: '#8B97A8' }}>乳腺结节智能分割 · 教学课件</Text>
+    <Text style={{ fontSize: 14, color: '#1E4FA8' }}>08 / 21</Text>
+  </Box>
+</Slide>

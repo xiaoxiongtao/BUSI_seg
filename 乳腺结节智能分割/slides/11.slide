@@ -1,0 +1,77 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', position: 'relative' }}>
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 8, background: '#1E4FA8' }} />
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 330, height: 670, background: '#0E3F8C' }}>
+    <Box style={{ position: 'absolute', top: 70, left: 40, width: 250, flexDirection: 'column', gap: 18 }}>
+      <Text style={{ fontSize: 20, color: '#9FB6DE', letterSpacing: 3 }}>02 检测基础</Text>
+      <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#FFFFFF', lineHeight: 1.3 }}>检测 vs 分割：为什么医学影像选 U-Net？</Text>
+      <Box style={{ width: 56, height: 4, background: '#FFC107', marginTop: 6 }} />
+      <Box style={{ background: 'rgba(255,255,255,0.12)', borderRadius: 10, padding: '14px 18px', marginTop: 12 }}>
+        <Text style={{ fontSize: 18, color: '#FFFFFF', lineHeight: 1.65 }}>
+          检测框能告诉医师"这里有个结节"，
+          <br />
+          但回答不了"它长成了什么形状"。
+        </Text>
+      </Box>
+      <Text style={{ fontSize: 17, color: '#C9D7EE', lineHeight: 1.7, marginTop: 4 }}>
+        毛刺、纵横比、边界模糊度——这些 BI-RADS 依赖的形态学证据，全部藏在像素级轮廓里。
+      </Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', top: 60, left: 376, width: 864, height: 552, flexDirection: 'column', gap: 18 }}>
+    <Table
+      style={{ width: '100%', height: 440 }}
+      defaultTextStyle={{ fontSize: 18, textAlign: 'center', color: '#1A2230' }}
+      defaultCellStyle={{
+        border: {
+          left: { width: 1, color: '#D6DCE5' },
+          right: { width: 1, color: '#D6DCE5' },
+          top: { width: 1, color: '#D6DCE5' },
+          bottom: { width: 1, color: '#D6DCE5' },
+        },
+      }}
+      cells={[
+        [
+          { text: '对比维度', textStyle: { bold: true, color: '#FFFFFF', fontSize: 19 }, cellStyle: { background: { color: '#1E4FA8' } } },
+          { text: '目标检测（YOLO）', textStyle: { bold: true, color: '#FFFFFF', fontSize: 19 }, cellStyle: { background: { color: '#1E4FA8' } } },
+          { text: '语义分割（U-Net）', textStyle: { bold: true, color: '#FFFFFF', fontSize: 19 }, cellStyle: { background: { color: '#0E3F8C' } } },
+        ],
+        [
+          { text: '输出形式', textStyle: { bold: true } },
+          '边界框 + 类别置信度',
+          { text: '逐像素类别 mask', textStyle: { bold: true } },
+        ],
+        [
+          { text: '监督信号', cellStyle: { background: { color: '#F7F9FC' } } },
+          '框坐标（CIoU/DFL）+ 框级分类（BCE）',
+          { text: '像素级标签（BCE + Dice）', cellStyle: { background: { color: '#F7F9FC' } } },
+        ],
+        [
+          { text: '对不规则边界的刻画', textStyle: { bold: true } },
+          '仅矩形外接框，无法表达毛刺/凹陷',
+          { text: '与病灶真实轮廓逐像素对齐', textStyle: { bold: true } },
+        ],
+        [
+          { text: '小数据集适配', cellStyle: { background: { color: '#F7F9FC' } } },
+          '检测需要更多样本与多尺度先验',
+          { text: 'U-Net 结构轻量 + 增强有效，数百例可训练', cellStyle: { background: { color: '#F7F9FC' } } },
+        ],
+        [
+          { text: '对本项目的价值', textStyle: { bold: true } },
+          '可作为级联第一步：粗定位 ROI',
+          { text: '核心输出：精确轮廓支撑定量分析', textStyle: { bold: true, color: '#D9534F' } },
+        ],
+      ]}
+    />
+    <Box style={{ background: '#E8EFF8', borderRadius: 10, padding: '14px 22px' }}>
+      <Text style={{ fontSize: 19, color: '#0E3F8C', lineHeight: 1.55 }}>
+        <span style={{ fontWeight: 'bold' }}>结论：</span>
+        乳腺结节分割的临床价值在"量"不在"找"——测量体积、评估切缘、量化形态都需要像素级输出，
+        因此本课以 U-Net / U-Net++ 为实战主线；YOLO 检测器可作为未来两阶段方案（先检测后分割）的定位前端。
+      </Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', bottom: 0, left: 0, width: 1280, height: 50, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0 40px', borderTop: '1px solid #E5E7EB', background: '#F7F9FC' }}>
+    <Text style={{ fontSize: 14, color: '#8B97A8' }}>乳腺结节智能分割 · 教学课件</Text>
+    <Text style={{ fontSize: 14, color: '#1E4FA8' }}>11 / 21</Text>
+  </Box>
+</Slide>

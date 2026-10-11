@@ -1,0 +1,47 @@
+<Slide style={{ width: 1280, height: 720, background: '#F7F9FC', position: 'relative' }}>
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 8, background: '#1E4FA8' }} />
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 300, background: 'linear-gradient(180deg, #0E3F8C 0%, #1E4FA8 100%)' }} />
+  <Box style={{ position: 'absolute', top: 86, left: 80, width: 1120, alignItems: 'center' }}>
+    <Text style={{ fontSize: 22, color: '#9FB6DE', letterSpacing: 3 }}>SUMMARY · 课程总结</Text>
+    <Text style={{ fontSize: 46, fontWeight: 'bold', color: '#FFFFFF', textAlign: 'center', lineHeight: 1.4, marginTop: 16 }}>
+      检测框定位病灶，像素级分割刻画病灶
+    </Text>
+  </Box>
+  <Box style={{ position: 'absolute', top: 340, left: 80, width: 1120, flexDirection: 'row', gap: 24 }}>
+    <Box style={{ flex: 1, background: '#FFFFFF', borderRadius: 12, border: '1px solid #D6DCE5', padding: '20px 24px', height: 200 }}>
+      <Text style={{ fontSize: 36, fontWeight: 'bold', color: '#1E4FA8' }}>01</Text>
+      <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C', marginTop: 8 }}>YOLO：一个网络完成定位+分类</Text>
+      <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6, marginTop: 6 }}>
+        Backbone/Neck/Head 三段式；损失 = CIoU + BCE + DFL，框级监督。
+      </Text>
+    </Box>
+    <Box style={{ flex: 1, background: '#FFFFFF', borderRadius: 12, border: '1px solid #D6DCE5', padding: '20px 24px', height: 200 }}>
+      <Text style={{ fontSize: 36, fontWeight: 'bold', color: '#1E4FA8' }}>02</Text>
+      <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C', marginTop: 8 }}>U-Net：医学分割的基石</Text>
+      <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6, marginTop: 6 }}>
+        编码-解码 + 跳跃连接；U-Net++ 密集连接 + 深度监督；损失 = BCE + Dice。
+      </Text>
+    </Box>
+    <Box style={{ flex: 1, background: '#FFFFFF', borderRadius: 12, border: '1px solid #D6DCE5', padding: '20px 24px', height: 200 }}>
+      <Text style={{ fontSize: 36, fontWeight: 'bold', color: '#1E4FA8' }}>03</Text>
+      <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C', marginTop: 8 }}>实验：结果要配判断</Text>
+      <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6, marginTop: 6 }}>
+        Dice 0.738 vs 0.747：U-Net++ 略优但参数多 18%；不平衡数据看 Dice 不看 Accuracy。
+      </Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', top: 566, left: 80, width: 1120, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+    <Box style={{ flexDirection: 'column', gap: 6 }}>
+      <Text style={{ fontSize: 19, color: '#0E3F8C' }}>
+        <span style={{ fontWeight: 'bold' }}>课后思考：</span>
+        ① 若用 YOLO 先定位 ROI 再用 U-Net 分割，两阶段各自承担什么风险？
+        ② 深度监督为什么对小数据集更友好？
+      </Text>
+    </Box>
+    <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#0E3F8C' }}>谢谢！</Text>
+  </Box>
+  <Box style={{ position: 'absolute', bottom: 0, left: 0, width: 1280, height: 50, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0 40px', borderTop: '1px solid #E5E7EB', background: '#FFFFFF' }}>
+    <Text style={{ fontSize: 14, color: '#8B97A8' }}>乳腺结节智能分割 · 教学课件 · 肖雄涛</Text>
+    <Text style={{ fontSize: 14, color: '#1E4FA8' }}>21 / 21</Text>
+  </Box>
+</Slide>

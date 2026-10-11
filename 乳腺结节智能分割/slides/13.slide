@@ -1,0 +1,105 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', position: 'relative' }}>
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 8, background: '#1E4FA8' }} />
+  <Box style={{ position: 'absolute', top: 28, left: 40, width: 1200, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid #D6DCE5', paddingBottom: 16 }}>
+    <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#0E3F8C' }}>U-Net 结构详解：编码-解码与跳跃连接</Text>
+    <Box style={{ background: '#E8EFF8', borderRadius: 999, padding: '6px 18px' }}>
+      <Text style={{ fontSize: 16, color: '#1E4FA8' }}>03 分割网络</Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', top: 104, left: 40, width: 700, height: 556, background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', justifyContent: 'center', alignItems: 'center' }}>
+    <svg width={660} height={524} viewBox='0 0 700 540'>
+      <rect x={40} y={20} width={170} height={64} rx={8} fill='#1E4FA8' />
+      <text x={125} y={47} fontSize={15} fill='#FFFFFF' textAnchor='middle'>输入 256×256×3</text>
+      <text x={125} y={68} fontSize={13} fill='#C9D7EE' textAnchor='middle'>Conv 3×3 ×2 → 32ch</text>
+      <path d='M125 84 L125 104' stroke='#3D7BD9' strokeWidth={2.5} />
+      <polygon points='120,104 125,114 130,104' fill='#3D7BD9' />
+      <text x={160} y={106} fontSize={13} fill='#4A5568'>MaxPool 2×2</text>
+
+      <rect x={40} y={116} width={170} height={64} rx={8} fill='#2A5CB0' />
+      <text x={125} y={143} fontSize={15} fill='#FFFFFF' textAnchor='middle'>Conv ×2 → 64ch</text>
+      <text x={125} y={164} fontSize={13} fill='#C9D7EE' textAnchor='middle'>128×128</text>
+      <path d='M125 180 L125 200' stroke='#3D7BD9' strokeWidth={2.5} />
+      <polygon points='120,200 125,210 130,200' fill='#3D7BD9' />
+
+      <rect x={40} y={212} width={170} height={64} rx={8} fill='#3D7BD9' />
+      <text x={125} y={239} fontSize={15} fill='#FFFFFF' textAnchor='middle'>Conv ×2 → 128ch</text>
+      <text x={125} y={260} fontSize={13} fill='#E8EFF8' textAnchor='middle'>64×64</text>
+      <path d='M125 276 L125 296' stroke='#3D7BD9' strokeWidth={2.5} />
+      <polygon points='120,296 125,306 130,296' fill='#3D7BD9' />
+
+      <rect x={40} y={308} width={170} height={64} rx={8} fill='#6C97D8' />
+      <text x={125} y={335} fontSize={15} fill='#FFFFFF' textAnchor='middle'>Conv ×2 → 256ch</text>
+      <text x={125} y={356} fontSize={13} fill='#E8EFF8' textAnchor='middle'>32×32</text>
+      <path d='M125 372 L125 392' stroke='#3D7BD9' strokeWidth={2.5} />
+      <polygon points='120,392 125,402 130,392' fill='#3D7BD9' />
+
+      <rect x={265} y={404} width={170} height={64} rx={8} fill='#0E3F8C' />
+      <text x={350} y={431} fontSize={15} fill='#FFFFFF' textAnchor='middle'>瓶颈层 → 512ch</text>
+      <text x={350} y={452} fontSize={13} fill='#C9D7EE' textAnchor='middle'>16×16 语义最抽象</text>
+      <path d='M210 340 L265 436' stroke='#3D7BD9' strokeWidth={2.5} />
+      <path d='M435 436 L490 340' stroke='#3D7BD9' strokeWidth={2.5} />
+
+      <rect x={490} y={308} width={170} height={64} rx={8} fill='#6C97D8' />
+      <text x={575} y={335} fontSize={15} fill='#FFFFFF' textAnchor='middle'>上采样+Conv → 256ch</text>
+      <text x={575} y={356} fontSize={13} fill='#E8EFF8' textAnchor='middle'>转置卷积 2×</text>
+      <path d='M575 308 L575 288' stroke='#3D7BD9' strokeWidth={2.5} />
+      <polygon points='570,288 575,278 580,288' fill='#3D7BD9' />
+
+      <rect x={490} y={212} width={170} height={64} rx={8} fill='#3D7BD9' />
+      <text x={575} y={239} fontSize={15} fill='#FFFFFF' textAnchor='middle'>上采样+Conv → 128ch</text>
+      <text x={575} y={260} fontSize={13} fill='#E8EFF8' textAnchor='middle'>64×64</text>
+      <path d='M575 212 L575 192' stroke='#3D7BD9' strokeWidth={2.5} />
+      <polygon points='570,192 575,182 580,192' fill='#3D7BD9' />
+
+      <rect x={490} y={116} width={170} height={64} rx={8} fill='#2A5CB0' />
+      <text x={575} y={143} fontSize={15} fill='#FFFFFF' textAnchor='middle'>上采样+Conv → 64ch</text>
+      <text x={575} y={164} fontSize={13} fill='#C9D7EE' textAnchor='middle'>128×128</text>
+      <path d='M575 116 L575 96' stroke='#3D7BD9' strokeWidth={2.5} />
+      <polygon points='570,96 575,86 580,96' fill='#3D7BD9' />
+
+      <rect x={490} y={20} width={170} height={64} rx={8} fill='#1E4FA8' />
+      <text x={575} y={45} fontSize={15} fill='#FFFFFF' textAnchor='middle'>1×1 Conv → 1ch</text>
+      <text x={575} y={66} fontSize={13} fill='#C9D7EE' textAnchor='middle'>Sigmoid 概率图 256×256</text>
+
+      <path d='M210 52 L490 52' stroke='#D9534F' strokeWidth={3} strokeDasharray='8 5' />
+      <path d='M210 148 L490 148' stroke='#D9534F' strokeWidth={3} strokeDasharray='8 5' />
+      <path d='M210 244 L490 244' stroke='#D9534F' strokeWidth={3} strokeDasharray='8 5' />
+      <path d='M210 340 L490 340' stroke='#D9534F' strokeWidth={3} strokeDasharray='8 5' />
+      <text x={350} y={40} fontSize={14} fontWeight='bold' fill='#D9534F' textAnchor='middle'>Skip Connection：concat(浅层细节)</text>
+      <text x={350} y={138} fontSize={14} fontWeight='bold' fill='#D9534F' textAnchor='middle'>Skip</text>
+      <text x={350} y={234} fontSize={14} fontWeight='bold' fill='#D9534F' textAnchor='middle'>Skip</text>
+      <text x={350} y={330} fontSize={14} fontWeight='bold' fill='#D9534F' textAnchor='middle'>Skip</text>
+      <text x={350} y={510} fontSize={15} fill='#4A5568' textAnchor='middle'>结构来源：Ronneberger et al., MICCAI 2015（本项目 base_channels=32，7.76M 参数）</text>
+    </svg>
+  </Box>
+  <Box style={{ position: 'absolute', top: 104, left: 764, width: 476, height: 556, flexDirection: 'column', gap: 14 }}>
+    <Box style={{ background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '16px 22px', flex: 1 }}>
+      <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>① 编码器：看懂图像</Text>
+      <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6, marginTop: 6 }}>
+        每级 DoubleConv（Conv+BN+ReLU ×2）后 MaxPool 下采样，通道 32→64→128→256→512，空间细节换语义抽象。
+      </Text>
+    </Box>
+    <Box style={{ background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '16px 22px', flex: 1 }}>
+      <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>② 解码器：画回原尺寸</Text>
+      <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6, marginTop: 6 }}>
+        转置卷积逐级上采样恢复分辨率，通道对称地减半，最后 1×1 卷积 + Sigmoid 输出逐像素概率图。
+      </Text>
+    </Box>
+    <Box style={{ background: '#F0F5FC', border: '2px solid #1E4FA8', borderRadius: 12, padding: '16px 22px', flex: 1 }}>
+      <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#1E4FA8' }}>③ 跳跃连接：本结构的灵魂</Text>
+      <Text style={{ fontSize: 17, color: '#0E3F8C', lineHeight: 1.6, marginTop: 6 }}>
+        把编码器同分辨率的浅层特征 concat 进解码器——下采样丢失的边缘细节被"抄近道"送回来，这正是分割边界比纯分类网络准的原因。
+      </Text>
+    </Box>
+    <Box style={{ background: '#E8EFF8', borderRadius: 12, padding: '16px 22px' }}>
+      <Text style={{ fontSize: 18, color: '#0E3F8C', lineHeight: 1.6 }}>
+        <span style={{ fontWeight: 'bold' }}>为什么适合医学影像？</span>
+        结构对称、参数可伸缩（base_channels 可调），数百例小数据集即可收敛——BUSI 780 例完全够用。
+      </Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', bottom: 0, left: 0, width: 1280, height: 50, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0 40px', borderTop: '1px solid #E5E7EB', background: '#F7F9FC' }}>
+    <Text style={{ fontSize: 14, color: '#8B97A8' }}>乳腺结节智能分割 · 教学课件</Text>
+    <Text style={{ fontSize: 14, color: '#1E4FA8' }}>13 / 21</Text>
+  </Box>
+</Slide>

@@ -1,0 +1,79 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', position: 'relative' }}>
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 8, background: '#1E4FA8' }} />
+  <Box style={{ position: 'absolute', top: 28, left: 40, width: 1200, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid #D6DCE5', paddingBottom: 16 }}>
+    <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#0E3F8C' }}>评价指标：从混淆矩阵到 Dice 系数</Text>
+    <Box style={{ background: '#E8EFF8', borderRadius: 999, padding: '6px 18px' }}>
+      <Text style={{ fontSize: 16, color: '#1E4FA8' }}>03 分割网络</Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', top: 110, left: 40, width: 430, height: 548, flexDirection: 'column', gap: 16 }}>
+    <Box style={{ background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', padding: '20px 24px', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <svg width={300} height={252} viewBox='0 0 300 252'>
+        <text x={130} y={20} fontSize={15} fill='#4A5568'>预测=病灶</text>
+        <text x={235} y={20} fontSize={15} fill='#4A5568'>预测=背景</text>
+        <text x={20} y={72} fontSize={15} fill='#4A5568'>真值=病灶</text>
+        <text x={20} y={162} fontSize={15} fill='#4A5568'>真值=背景</text>
+        <rect x={100} y={30} width={88} height={80} rx={6} fill='#1E4FA8' />
+        <text x={144} y={64} fontSize={22} fontWeight='bold' fill='#FFFFFF' textAnchor='middle'>TP</text>
+        <text x={144} y={92} fontSize={12} fill='#C9D7EE' textAnchor='middle'>正确找病灶</text>
+        <rect x={196} y={30} width={88} height={80} rx={6} fill='#D9534F' />
+        <text x={240} y={64} fontSize={22} fontWeight='bold' fill='#FFFFFF' textAnchor='middle'>FP</text>
+        <text x={240} y={92} fontSize={12} fill='#F5D9D7' textAnchor='middle'>误报</text>
+        <rect x={100} y={120} width={88} height={80} rx={6} fill='#3D7BD9' />
+        <text x={144} y={154} fontSize={22} fontWeight='bold' fill='#FFFFFF' textAnchor='middle'>FN</text>
+        <text x={144} y={182} fontSize={12} fill='#DCE6F5' textAnchor='middle'>漏诊</text>
+        <rect x={196} y={120} width={88} height={80} rx={6} fill='#8B97A8' />
+        <text x={240} y={154} fontSize={22} fontWeight='bold' fill='#FFFFFF' textAnchor='middle'>TN</text>
+        <text x={240} y={182} fontSize={12} fill='#E8EAEE' textAnchor='middle'>正确背景</text>
+      </svg>
+      <Text style={{ fontSize: 16, color: '#4A5568', marginTop: 4, textAlign: 'center' }}>像素级混淆矩阵：一切指标由此计算</Text>
+    </Box>
+    <Box style={{ background: '#E8EFF8', borderRadius: 12, padding: '16px 22px' }}>
+      <Text style={{ fontSize: 18, color: '#0E3F8C', lineHeight: 1.6 }}>
+        <span style={{ fontWeight: 'bold' }}>反直觉的一点：</span>
+        一张 256×256 图，病灶仅占 3% 时——模型全输出"背景"，Accuracy 也有 97%，但它什么都没做对。
+      </Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', top: 110, left: 494, width: 746, height: 548, flexDirection: 'column', gap: 12 }}>
+    <Box style={{ background: '#0E3F8C', borderRadius: 10, padding: '12px 22px', flexDirection: 'row', alignItems: 'center', gap: 20 }}>
+      <Box style={{ width: 170 }}><Text style={{ fontSize: 19, fontWeight: 'bold', color: '#FFC107' }}>Dice（核心）</Text></Box>
+      <Math latex={'Dice = \\frac{2TP}{2TP + FP + FN}'} width={200} color={'#FFFFFF'} />
+      <Text style={{ fontSize: 15, color: '#C9D7EE', flex: 1 }}>预测与真值重合度，选最优权重就按它</Text>
+    </Box>
+    <Box style={{ background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 10, padding: '12px 22px', flexDirection: 'row', alignItems: 'center', gap: 20 }}>
+      <Box style={{ width: 170 }}><Text style={{ fontSize: 19, fontWeight: 'bold', color: '#0E3F8C' }}>IoU（交并比）</Text></Box>
+      <Math latex={'IoU = \\frac{TP}{TP + FP + FN}'} width={190} color={'#1A2230'} />
+      <Text style={{ fontSize: 15, color: '#4A5568', flex: 1 }}>交集 / 并集，比 Dice 更严格</Text>
+    </Box>
+    <Box style={{ background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 10, padding: '12px 22px', flexDirection: 'row', alignItems: 'center', gap: 20 }}>
+      <Box style={{ width: 170 }}><Text style={{ fontSize: 19, fontWeight: 'bold', color: '#0E3F8C' }}>Precision 精确率</Text></Box>
+      <Math latex={'P = \\frac{TP}{TP + FP}'} width={140} color={'#1A2230'} />
+      <Text style={{ fontSize: 15, color: '#4A5568', flex: 1 }}>报出来的病灶有多少是真的（误报代价）</Text>
+    </Box>
+    <Box style={{ background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 10, padding: '12px 22px', flexDirection: 'row', alignItems: 'center', gap: 20 }}>
+      <Box style={{ width: 170 }}><Text style={{ fontSize: 19, fontWeight: 'bold', color: '#0E3F8C' }}>Recall 召回率</Text></Box>
+      <Math latex={'R = \\frac{TP}{TP + FN}'} width={140} color={'#1A2230'} />
+      <Text style={{ fontSize: 15, color: '#4A5568', flex: 1 }}>真实病灶找到了多少（漏诊代价）</Text>
+    </Box>
+    <Box style={{ background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 10, padding: '12px 22px', flexDirection: 'row', alignItems: 'center', gap: 20 }}>
+      <Box style={{ width: 170 }}><Text style={{ fontSize: 19, fontWeight: 'bold', color: '#0E3F8C' }}>Specificity 特异度</Text></Box>
+      <Math latex={'Sp = \\frac{TN}{TN + FP}'} width={140} color={'#1A2230'} />
+      <Text style={{ fontSize: 15, color: '#4A5568', flex: 1 }}>背景被正确保留的比例</Text>
+    </Box>
+    <Box style={{ background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 10, padding: '12px 22px', flexDirection: 'row', alignItems: 'center', gap: 20 }}>
+      <Box style={{ width: 170 }}><Text style={{ fontSize: 19, fontWeight: 'bold', color: '#0E3F8C' }}>Accuracy 准确率</Text></Box>
+      <Math latex={'Acc = \\frac{TP + TN}{TP + TN + FP + FN}'} width={230} color={'#1A2230'} />
+      <Text style={{ fontSize: 15, color: '#4A5568', flex: 1 }}>全体像素正确率，仅作参考</Text>
+    </Box>
+    <Box style={{ background: '#E8EFF8', borderRadius: 10, padding: '12px 22px' }}>
+      <Text style={{ fontSize: 17, color: '#0E3F8C', lineHeight: 1.55 }}>
+        临床视角：筛查场景更怕<span style={{ fontWeight: 'bold' }}>漏诊</span>（看 Recall），定量分析更怕<span style={{ fontWeight: 'bold' }}>误报</span>（看 Precision）——Dice 是两者的综合体现。
+      </Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', bottom: 0, left: 0, width: 1280, height: 50, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0 40px', borderTop: '1px solid #E5E7EB', background: '#F7F9FC' }}>
+    <Text style={{ fontSize: 14, color: '#8B97A8' }}>乳腺结节智能分割 · 教学课件</Text>
+    <Text style={{ fontSize: 14, color: '#1E4FA8' }}>16 / 21</Text>
+  </Box>
+</Slide>

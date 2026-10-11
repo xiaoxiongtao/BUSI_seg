@@ -1,0 +1,24 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', position: 'relative' }}>
+  <Image src="assets/cover_ultrasound.jpg" style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 720, objectFit: 'cover' }} />
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 720, background: 'linear-gradient(180deg, rgba(14,63,140,0.55) 0%, rgba(14,63,140,0.25) 45%, rgba(10,40,95,0.65) 100%)' }} />
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 8, background: '#1E4FA8' }} />
+  <Box style={{ position: 'absolute', top: 96, left: 80, width: 1120, flexDirection: 'column', gap: 18 }}>
+    <Box style={{ background: 'rgba(255,255,255,0.14)', borderRadius: 999, padding: '8px 22px', alignSelf: 'flex-start', border: '1px solid rgba(255,255,255,0.45)' }}>
+      <Text style={{ fontSize: 18, color: '#FFFFFF', letterSpacing: 2 }}>深度学习与医学影像 · 课程教学课件</Text>
+    </Box>
+    <Text style={{ fontSize: 84, fontWeight: 'bold', color: '#FFFFFF', lineHeight: 1.15 }}>乳腺结节智能分割</Text>
+    <Text style={{ fontSize: 26, color: '#E8EFF8', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}>
+      Intelligent Segmentation of Breast Lesions in Ultrasound Images
+    </Text>
+    <Box style={{ width: 120, height: 4, background: '#FFC107', marginTop: 6 }} />
+    <Text style={{ fontSize: 26, color: '#FFFFFF', marginTop: 14, lineHeight: 1.6 }}>
+      从目标检测到像素级分割：YOLO 网络框架、损失函数
+      <br />
+      与 U-Net / U-Net++ 乳腺超声分割实战
+    </Text>
+  </Box>
+  <Box style={{ position: 'absolute', bottom: 0, left: 0, width: 1280, height: 64, background: 'rgba(10,40,95,0.72)', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0 80px' }}>
+    <Text style={{ fontSize: 18, color: '#FFFFFF' }}>主讲：肖雄涛</Text>
+    <Text style={{ fontSize: 18, color: '#E8EFF8' }}>基于 BUSI 乳腺超声数据集（780 例） · 2026 年 10 月</Text>
+  </Box>
+</Slide>

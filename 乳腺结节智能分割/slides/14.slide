@@ -1,0 +1,96 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', position: 'relative' }}>
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 8, background: '#1E4FA8' }} />
+  <Box style={{ position: 'absolute', top: 28, left: 40, width: 1200, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid #D6DCE5', paddingBottom: 16 }}>
+    <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#0E3F8C' }}>U-Net++：嵌套密集跳跃连接与深度监督</Text>
+    <Box style={{ background: '#E8EFF8', borderRadius: 999, padding: '6px 18px' }}>
+      <Text style={{ fontSize: 16, color: '#1E4FA8' }}>03 分割网络</Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', top: 104, left: 40, width: 1200, height: 300, background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', justifyContent: 'center', alignItems: 'center' }}>
+    <svg width={1120} height={264} viewBox='0 0 1160 280'>
+      <rect x={30} y={100} width={130} height={58} rx={8} fill='#1E4FA8' />
+      <text x={95} y={126} fontSize={15} fill='#FFFFFF' textAnchor='middle'>X^{0,0}</text>
+      <text x={95} y={146} fontSize={12} fill='#C9D7EE' textAnchor='middle'>编码器 32ch</text>
+      <rect x={30} y={200} width={130} height={50} rx={8} fill='#2A5CB0' />
+      <text x={95} y={231} fontSize={15} fill='#FFFFFF' textAnchor='middle'>X^{1,0}</text>
+
+      <rect x={260} y={100} width={130} height={58} rx={8} fill='#3D7BD9' />
+      <text x={325} y={126} fontSize={15} fill='#FFFFFF' textAnchor='middle'>X^{0,1}</text>
+      <text x={325} y={146} fontSize={12} fill='#E8EFF8' textAnchor='middle'>浅解码 · 输出1</text>
+      <rect x={260} y={200} width={130} height={50} rx={8} fill='#3D7BD9' />
+      <text x={325} y={231} fontSize={15} fill='#FFFFFF' textAnchor='middle'>X^{1,1}</text>
+
+      <rect x={490} y={100} width={130} height={58} rx={8} fill='#6C97D8' />
+      <text x={555} y={126} fontSize={15} fill='#FFFFFF' textAnchor='middle'>X^{0,2}</text>
+      <text x={555} y={146} fontSize={12} fill='#E8EFF8' textAnchor='middle'>中解码 · 输出2</text>
+      <rect x={490} y={200} width={130} height={50} rx={8} fill='#6C97D8' />
+      <text x={555} y={231} fontSize={15} fill='#FFFFFF' textAnchor='middle'>X^{2,0}</text>
+
+      <rect x={720} y={100} width={130} height={58} rx={8} fill='#2A5CB0' />
+      <text x={785} y={126} fontSize={15} fill='#FFFFFF' textAnchor='middle'>X^{0,3}</text>
+      <text x={785} y={146} fontSize={12} fill='#C9D7EE' textAnchor='middle'>深解码 · 输出3</text>
+
+      <rect x={950} y={100} width={130} height={58} rx={8} fill='#0E3F8C' />
+      <text x={1015} y={126} fontSize={15} fill='#FFFFFF' textAnchor='middle'>X^{0,4}</text>
+      <text x={1015} y={146} fontSize={12} fill='#C9D7EE' textAnchor='middle'>最深 · 推理输出</text>
+
+      <path d='M160 129 L260 129' stroke='#3D7BD9' strokeWidth={2.5} />
+      <polygon points='260,124 270,129 260,134' fill='#3D7BD9' />
+      <path d='M390 129 L490 129' stroke='#3D7BD9' strokeWidth={2.5} />
+      <polygon points='490,124 500,129 490,134' fill='#3D7BD9' />
+      <path d='M620 129 L720 129' stroke='#3D7BD9' strokeWidth={2.5} />
+      <polygon points='720,124 730,129 720,134' fill='#3D7BD9' />
+      <path d='M850 129 L950 129' stroke='#3D7BD9' strokeWidth={2.5} />
+      <polygon points='950,124 960,129 950,134' fill='#3D7BD9' />
+
+      <path d='M160 225 L260 225' stroke='#3D7BD9' strokeWidth={2.5} />
+      <path d='M325 200 L325 158' stroke='#D9534F' strokeWidth={2.5} strokeDasharray='6 4' />
+      <path d='M390 225 L490 225' stroke='#3D7BD9' strokeWidth={2.5} />
+      <path d='M555 200 L555 158' stroke='#D9534F' strokeWidth={2.5} strokeDasharray='6 4' />
+
+      <path d='M100 200 L100 158' stroke='#3D7BD9' strokeWidth={2.5} />
+
+      <path d='M95 100 C 170 30, 300 30, 318 96' stroke='#D9534F' strokeWidth={3} fill='none' strokeDasharray='8 5' />
+      <path d='M325 100 C 400 18, 530 18, 548 96' stroke='#D9534F' strokeWidth={3} fill='none' strokeDasharray='8 5' />
+      <path d='M555 100 C 630 8, 760 8, 778 96' stroke='#D9534F' strokeWidth={3} fill='none' strokeDasharray='8 5' />
+      <path d='M785 100 C 860 0, 990 0, 1008 96' stroke='#D9534F' strokeWidth={3} fill='none' strokeDasharray='8 5' />
+
+      <text x={580} y={266} fontSize={15} fill='#4A5568' textAnchor='middle'>红虚线：嵌套密集跳跃连接（同层拼接）　实线：上采样流　每个 X^{0,j} 都可接分割头</text>
+    </svg>
+  </Box>
+  <Box style={{ position: 'absolute', top: 428, left: 40, width: 1200, flexDirection: 'row', gap: 20 }}>
+    <Box style={{ flex: 1.35, background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', padding: '18px 24px', height: 182 }}>
+      <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#0E3F8C' }}>嵌套密集连接解决什么问题？</Text>
+      <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.62, marginTop: 8 }}>
+        U-Net 的跳跃连接直接把<span style={{ fontWeight: 'bold' }}>深层语义</span>与<span style={{ fontWeight: 'bold' }}>浅层细节</span>拼接，
+        两者之间存在语义鸿沟。U-Net++ 在编码-解码之间插入一系列嵌套的中间节点
+        X^{i,j}，让特征"逐级过渡"，语义差距更平滑（Zhou et al., DLMIA 2018）。
+      </Text>
+    </Box>
+    <Box style={{ flex: 1, background: '#F0F5FC', borderRadius: 12, border: '2px solid #1E4FA8', padding: '18px 24px', height: 182 }}>
+      <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#1E4FA8' }}>深度监督（本项目已开启）</Text>
+      <Text style={{ fontSize: 18, color: '#0E3F8C', lineHeight: 1.62, marginTop: 8 }}>
+        训练时对 X^{0,1}…X^{0,4} 四个输出<span style={{ fontWeight: 'bold' }}>分别计算损失取平均</span>，
+        为浅层提供直接梯度；推理时只用最深层 X^{0,4}，精度不降、参数不增。
+      </Text>
+    </Box>
+    <Box style={{ flex: 0.75, background: '#0E3F8C', borderRadius: 12, padding: '18px 24px', height: 182 }}>
+      <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFFFFF' }}>代价与收益</Text>
+      <Box style={{ flexDirection: 'row', gap: 18, marginTop: 12 }}>
+        <Box>
+          <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#FFC107' }}>9.16M</Text>
+          <Text style={{ fontSize: 15, color: '#C9D7EE' }}>U-Net++ 参数</Text>
+        </Box>
+        <Box>
+          <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#FFFFFF' }}>7.76M</Text>
+          <Text style={{ fontSize: 15, color: '#C9D7EE' }}>U-Net 参数</Text>
+        </Box>
+      </Box>
+      <Text style={{ fontSize: 16, color: '#C9D7EE', marginTop: 10 }}>参数多 18%，换取更平滑的特征过渡（实测见第 18 页）</Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', bottom: 0, left: 0, width: 1280, height: 50, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0 40px', borderTop: '1px solid #E5E7EB', background: '#F7F9FC' }}>
+    <Text style={{ fontSize: 14, color: '#8B97A8' }}>乳腺结节智能分割 · 教学课件</Text>
+    <Text style={{ fontSize: 14, color: '#1E4FA8' }}>14 / 21</Text>
+  </Box>
+</Slide>

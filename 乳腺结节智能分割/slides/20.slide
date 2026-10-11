@@ -1,0 +1,71 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', position: 'relative' }}>
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 8, background: '#1E4FA8' }} />
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 330, height: 670, background: '#0E3F8C' }}>
+    <Box style={{ position: 'absolute', top: 70, left: 40, width: 250, flexDirection: 'column', gap: 18 }}>
+      <Text style={{ fontSize: 20, color: '#9FB6DE', letterSpacing: 3 }}>04 实验与实操</Text>
+      <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#FFFFFF', lineHeight: 1.3 }}>课内实操任务书</Text>
+      <Box style={{ width: 56, height: 4, background: '#FFC107', marginTop: 6 }} />
+      <Text style={{ fontSize: 18, color: '#C9D7EE', lineHeight: 1.7, marginTop: 8 }}>
+        2 人一组，约 60 分钟。所有命令在项目根目录 BUSI_seg/ 下执行，结果自动保存到 outputs/ 目录。
+      </Text>
+      <Box style={{ background: 'rgba(255,255,255,0.12)', borderRadius: 10, padding: '14px 18px', marginTop: 8 }}>
+        <Text style={{ fontSize: 17, color: '#FFFFFF', lineHeight: 1.65 }}>
+          环境：Python 3.9+，pip install -r requirements.txt（CPU 可跑，GPU 更快）
+        </Text>
+      </Box>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', top: 56, left: 376, width: 864, flexDirection: 'column', gap: 14 }}>
+    <Box style={{ flexDirection: 'row', gap: 16, background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', padding: '14px 20px' }}>
+      <Box style={{ width: 46, height: 46, background: '#1E4FA8', borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}><Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFFFFF' }}>1</Text></Box>
+      <Box style={{ flex: 1 }}>
+        <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>跑通基线（15 分钟）</Text>
+        <Box style={{ background: '#0E3F8C', borderRadius: 8, padding: '10px 16px', marginTop: 8 }}>
+          <Text style={{ fontSize: 16, color: '#C9D7EE' }}>python -m src.train --model unet --epochs 30 --loss bce_dice</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#4A5568', marginTop: 6 }}>观察 metrics.csv 与 training_curves.png，确认流程通畅、曲线形态正常。</Text>
+      </Box>
+    </Box>
+    <Box style={{ flexDirection: 'row', gap: 16, background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', padding: '14px 20px' }}>
+      <Box style={{ width: 46, height: 46, background: '#1E4FA8', borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}><Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFFFFF' }}>2</Text></Box>
+      <Box style={{ flex: 1 }}>
+        <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>换损失函数对比（20 分钟）</Text>
+        <Box style={{ background: '#0E3F8C', borderRadius: 8, padding: '10px 16px', marginTop: 8 }}>
+          <Text style={{ fontSize: 16, color: '#C9D7EE' }}>--loss bce　/　--loss dice　/　--loss focal（各跑一次）</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#4A5568', marginTop: 6 }}>记录三种损失下的验证集 Dice，回答：哪种对类别不平衡最鲁棒？与理论预期一致吗？</Text>
+      </Box>
+    </Box>
+    <Box style={{ flexDirection: 'row', gap: 16, background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', padding: '14px 20px' }}>
+      <Box style={{ width: 46, height: 46, background: '#1E4FA8', borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}><Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFFFFF' }}>3</Text></Box>
+      <Box style={{ flex: 1 }}>
+        <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>调参实验（15 分钟）</Text>
+        <Box style={{ background: '#0E3F8C', borderRadius: 8, padding: '10px 16px', marginTop: 8 }}>
+          <Text style={{ fontSize: 16, color: '#C9D7EE' }}>--base-channels 16 vs 64　/　--lr 1e-2 vs 1e-4（各选一组）</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#4A5568', marginTop: 6 }}>观察容量与学习率对收敛速度、最终 Dice、参数量的影响。</Text>
+      </Box>
+    </Box>
+    <Box style={{ flexDirection: 'row', gap: 16, background: '#F0F5FC', borderRadius: 12, border: '2px solid #1E4FA8', padding: '14px 20px' }}>
+      <Box style={{ width: 46, height: 46, background: '#0E3F8C', borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}><Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFFFFF' }}>4</Text></Box>
+      <Box style={{ flex: 1 }}>
+        <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>失败案例分析（10 分钟）</Text>
+        <Text style={{ fontSize: 16, color: '#0E3F8C', lineHeight: 1.55, marginTop: 6 }}>
+          用 python -m src.evaluate --checkpoint outputs/&lt;你的目录&gt;/best.pt 评估，
+          并找出 Dice 最低的 2 张测试图：是边界模糊？病灶太小？还是 GT 标注本身有争议？
+        </Text>
+      </Box>
+    </Box>
+    <Box style={{ background: '#E8EFF8', borderRadius: 12, padding: '12px 20px' }}>
+      <Text style={{ fontSize: 17, color: '#0E3F8C', lineHeight: 1.6 }}>
+        <span style={{ fontWeight: 'bold' }}>验收标准：</span>
+        ① 提交实验记录表（每种配置的 val Dice / IoU / 参数量）；② 一句结论回答"损失函数与网络容量哪个对结果影响更大"；
+        ③ 150 字失败案例分析。评分权重：实验完整性 40% + 结论有据 40% + 分析深度 20%。
+      </Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', bottom: 0, left: 0, width: 1280, height: 50, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0 40px', borderTop: '1px solid #E5E7EB', background: '#F7F9FC' }}>
+    <Text style={{ fontSize: 14, color: '#8B97A8' }}>乳腺结节智能分割 · 教学课件</Text>
+    <Text style={{ fontSize: 14, color: '#1E4FA8' }}>20 / 21</Text>
+  </Box>
+</Slide>

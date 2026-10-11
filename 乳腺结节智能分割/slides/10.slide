@@ -1,0 +1,84 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', position: 'relative' }}>
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 8, background: '#1E4FA8' }} />
+  <Box style={{ position: 'absolute', top: 28, left: 40, width: 1200, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid #D6DCE5', paddingBottom: 16 }}>
+    <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#0E3F8C' }}>YOLO 损失函数：一项分类 + 两项回归</Text>
+    <Box style={{ background: '#E8EFF8', borderRadius: 999, padding: '6px 18px' }}>
+      <Text style={{ fontSize: 16, color: '#1E4FA8' }}>02 检测基础</Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', top: 110, left: 40, width: 760, height: 548, flexDirection: 'column', gap: 16 }}>
+    <Box style={{ background: '#0E3F8C', borderRadius: 12, padding: '18px 26px', justifyContent: 'center', alignItems: 'center' }}>
+      <Math latex={'L_{total} = \\lambda_{box}\\,L_{CIoU} + \\lambda_{cls}\\,L_{BCE} + \\lambda_{dfl}\\,L_{DFL}'} width={430} display={true} color={'#FFFFFF'} />
+      <Text style={{ fontSize: 17, color: '#C9D7EE', marginTop: 8 }}>
+        YOLOv8 默认权重：λ box = 7.5，λ cls = 0.5，λ dfl = 1.5（Jocher et al., Ultralytics YOLOv8, 2023）
+      </Text>
+    </Box>
+    <Box style={{ background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', padding: '16px 24px', flex: 1 }}>
+      <Box style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#0E3F8C' }}>① CIoU 回归损失（只作用于正样本）</Text>
+        <Box style={{ background: '#E8EFF8', borderRadius: 999, padding: '4px 14px' }}><Text style={{ fontSize: 15, color: '#1E4FA8' }}>框的定位</Text></Box>
+      </Box>
+      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 20, marginTop: 10 }}>
+        <Math latex={'L_{CIoU} = 1 - IoU + \\frac{\\rho^2(b, b^{gt})}{c^2} + \\alpha v'} width={330} color={'#1A2230'} />
+        <Box style={{ flex: 1 }}>
+          <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6 }}>
+            在 IoU 基础上叠加 <span style={{ fontWeight: 'bold' }}>中心点距离 ρ/c</span> 与
+            <span style={{ fontWeight: 'bold' }}>长宽比一致性 v</span>，同时惩罚"位置偏"与"形状歪"。
+          </Text>
+        </Box>
+      </Box>
+    </Box>
+    <Box style={{ background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', padding: '16px 24px', flex: 1 }}>
+      <Box style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#0E3F8C' }}>② BCE 分类损失（含背景负样本）</Text>
+        <Box style={{ background: '#E8EFF8', borderRadius: 999, padding: '4px 14px' }}><Text style={{ fontSize: 15, color: '#1E4FA8' }}>是否为病灶</Text></Box>
+      </Box>
+      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 20, marginTop: 10 }}>
+        <Math latex={'L_{BCE} = -\\sum_i \\big[ y_i \\log p_i + (1 - y_i) \\log (1 - p_i) \\big]'} width={400} color={'#1A2230'} />
+        <Box style={{ flex: 1 }}>
+          <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6 }}>
+            逐 anchor point 的二元交叉熵；正负样本极不均衡，依靠 TAL 与损失权重抑制背景主导。
+          </Text>
+        </Box>
+      </Box>
+    </Box>
+    <Box style={{ background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', padding: '16px 24px', flex: 1 }}>
+      <Box style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#0E3F8C' }}>③ DFL 分布焦点损失</Text>
+        <Box style={{ background: '#E8EFF8', borderRadius: 999, padding: '4px 14px' }}><Text style={{ fontSize: 15, color: '#1E4FA8' }}>框边不确定性</Text></Box>
+      </Box>
+      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 20, marginTop: 10 }}>
+        <Math latex={'L_{DFL} = -\\big[(y_{i+1} - y)\\log \\sigma_i + (y - y_i)\\log \\sigma_{i+1}\\big]'} width={430} color={'#1A2230'} />
+        <Box style={{ flex: 1 }}>
+          <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6 }}>
+            把框边位置建模为<span style={{ fontWeight: 'bold' }}>离散概率分布</span>而非单点回归，让网络表达"边界在哪儿"的不确定性。
+          </Text>
+        </Box>
+      </Box>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', top: 110, left: 824, width: 416, height: 548, flexDirection: 'column', gap: 16 }}>
+    <Box style={{ background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '18px 22px', flex: 1 }}>
+      <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>课堂要点 1</Text>
+      <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.65, marginTop: 8 }}>
+        回归类损失（CIoU / DFL）只在被 TAL 判定为正样本的位置计算；分类损失覆盖所有位置。
+      </Text>
+    </Box>
+    <Box style={{ background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '18px 22px', flex: 1 }}>
+      <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>课堂要点 2</Text>
+      <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.65, marginTop: 8 }}>
+        λ box 最大（7.5）：定位精度是检测的核心；分类损失权重最小，因为背景点数量庞大、天然易学。
+      </Text>
+    </Box>
+    <Box style={{ background: '#E8EFF8', borderRadius: 12, padding: '18px 22px', flex: 1 }}>
+      <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#1E4FA8' }}>承上启下</Text>
+      <Text style={{ fontSize: 18, color: '#0E3F8C', lineHeight: 1.65, marginTop: 8 }}>
+        下一页把这套"框级监督"与分割的"像素级监督"对照——这正是医学影像选择 U-Net 的原因。
+      </Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', bottom: 0, left: 0, width: 1280, height: 50, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0 40px', borderTop: '1px solid #E5E7EB', background: '#F7F9FC' }}>
+    <Text style={{ fontSize: 14, color: '#8B97A8' }}>乳腺结节智能分割 · 教学课件</Text>
+    <Text style={{ fontSize: 14, color: '#1E4FA8' }}>10 / 21</Text>
+  </Box>
+</Slide>

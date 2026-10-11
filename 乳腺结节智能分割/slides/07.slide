@@ -1,0 +1,33 @@
+<Slide style={{ width: 1280, height: 720, background: '#F7F9FC', position: 'relative' }}>
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 8, background: '#1E4FA8' }} />
+  <Text style={{ position: 'absolute', top: 60, left: 70, fontSize: 300, fontWeight: 'bold', color: '#DCE6F5', lineHeight: 1 }}>02</Text>
+  <Box style={{ position: 'absolute', top: 250, left: 520, width: 700, flexDirection: 'column', gap: 22 }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+      <Box style={{ width: 10, height: 44, background: '#FFC107' }} />
+      <Text style={{ fontSize: 22, color: '#3D7BD9', letterSpacing: 3 }}>PART 02 · OBJECT DETECTION</Text>
+    </Box>
+    <Text style={{ fontSize: 48, fontWeight: 'bold', color: '#0E3F8C', lineHeight: 1.3 }}>检测基础：YOLO</Text>
+    <Text style={{ fontSize: 24, color: '#4A5568', lineHeight: 1.7 }}>
+      在进入分割网络之前，先建立目标检测的完整图景：YOLO 如何用一个网络
+      同时完成定位与分类，以及它的损失函数由哪几部分构成。
+    </Text>
+    <Box style={{ flexDirection: 'row', gap: 14, marginTop: 10 }}>
+      <Box style={{ background: '#E8EFF8', borderRadius: 999, padding: '10px 24px' }}>
+        <Text style={{ fontSize: 19, color: '#1E4FA8' }}>三段式框架</Text>
+      </Box>
+      <Box style={{ background: '#E8EFF8', borderRadius: 999, padding: '10px 24px' }}>
+        <Text style={{ fontSize: 19, color: '#1E4FA8' }}>核心模块拆解</Text>
+      </Box>
+      <Box style={{ background: '#E8EFF8', borderRadius: 999, padding: '10px 24px' }}>
+        <Text style={{ fontSize: 19, color: '#1E4FA8' }}>CIoU + BCE + DFL</Text>
+      </Box>
+      <Box style={{ background: '#E8EFF8', borderRadius: 999, padding: '10px 24px' }}>
+        <Text style={{ fontSize: 19, color: '#1E4FA8' }}>检测 vs 分割</Text>
+      </Box>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', bottom: 0, left: 0, width: 1280, height: 50, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0 40px', borderTop: '1px solid #E5E7EB', background: '#FFFFFF' }}>
+    <Text style={{ fontSize: 14, color: '#8B97A8' }}>乳腺结节智能分割 · 教学课件</Text>
+    <Text style={{ fontSize: 14, color: '#1E4FA8' }}>07 / 21</Text>
+  </Box>
+</Slide>

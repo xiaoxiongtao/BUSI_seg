@@ -1,0 +1,63 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', position: 'relative' }}>
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 8, background: '#1E4FA8' }} />
+  <Box style={{ position: 'absolute', top: 28, left: 40, width: 1200, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid #D6DCE5', paddingBottom: 16 }}>
+    <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#0E3F8C' }}>实验结果：两种网络究竟差多少？</Text>
+    <Box style={{ background: '#E8EFF8', borderRadius: 999, padding: '6px 18px' }}>
+      <Text style={{ fontSize: 16, color: '#1E4FA8' }}>04 实验与实操</Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', top: 106, left: 40, width: 760, height: 552, background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', padding: '14px 18px' }}>
+    <Image src="assets/comparison.jpg" style={{ width: 724, height: 434, objectFit: 'contain' }} />
+    <Text style={{ fontSize: 16, color: '#4A5568', marginTop: 10, lineHeight: 1.55 }}>
+      BUSI 测试集（780 例按类别分层 70/15/15 划分，seed=42）。两模型均训练 100 epoch，
+      batch=8，lr=1e-3，损失 BCE+Dice，按验证集 Dice 保存最优权重（outputs/comparison/）。
+    </Text>
+  </Box>
+  <Box style={{ position: 'absolute', top: 106, left: 824, width: 416, height: 552, flexDirection: 'column', gap: 14 }}>
+    <Box style={{ flexDirection: 'row', gap: 14 }}>
+      <Box style={{ flex: 1, background: '#0E3F8C', borderRadius: 12, padding: '14px 16px' }}>
+        <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#FFFFFF' }}>0.747</Text>
+        <Text style={{ fontSize: 15, color: '#C9D7EE', marginTop: 2 }}>U-Net++ Dice</Text>
+      </Box>
+      <Box style={{ flex: 1, background: '#1E4FA8', borderRadius: 12, padding: '14px 16px' }}>
+        <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#FFFFFF' }}>0.738</Text>
+        <Text style={{ fontSize: 15, color: '#C9D7EE', marginTop: 2 }}>U-Net Dice</Text>
+      </Box>
+    </Box>
+    <Table
+      style={{ width: '100%', height: 190 }}
+      defaultTextStyle={{ fontSize: 16, textAlign: 'center', color: '#1A2230' }}
+      defaultCellStyle={{
+        border: {
+          left: { width: 1, color: '#D6DCE5' },
+          right: { width: 1, color: '#D6DCE5' },
+          top: { width: 1, color: '#D6DCE5' },
+          bottom: { width: 1, color: '#D6DCE5' },
+        },
+      }}
+      cells={[
+        [
+          { text: '指标', textStyle: { bold: true, color: '#FFFFFF', fontSize: 16 }, cellStyle: { background: { color: '#1E4FA8' } } },
+          { text: 'U-Net', textStyle: { bold: true, color: '#FFFFFF', fontSize: 16 }, cellStyle: { background: { color: '#1E4FA8' } } },
+          { text: 'U-Net++', textStyle: { bold: true, color: '#FFFFFF', fontSize: 16 }, cellStyle: { background: { color: '#0E3F8C' } } },
+        ],
+        ['IoU', '0.585', { text: '0.596', textStyle: { bold: true, color: '#1E4FA8' } }],
+        ['Precision', '0.776', { text: '0.789', cellStyle: { background: { color: '#F7F9FC' } } }],
+        ['Recall', '0.704', '0.709'],
+        ['参数量', '7.76M', { text: '9.16M', textStyle: { color: '#D9534F' } }],
+      ]}
+    />
+    <Box style={{ background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 12, padding: '14px 20px', flex: 1 }}>
+      <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>怎么解读这组数字？</Text>
+      <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6, marginTop: 8 }}>
+        U-Net++ 六项指标全部略优（验证集 Dice 0.781 vs 0.770），说明密集连接与深度监督有效；
+        但提升约 1 个点，而参数多 18%——
+        <span style={{ fontWeight: 'bold' }}>在几百例量级的教学实验中，结构收益有限，公平比较必须控制训练配置一致。</span>
+      </Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', bottom: 0, left: 0, width: 1280, height: 50, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0 40px', borderTop: '1px solid #E5E7EB', background: '#F7F9FC' }}>
+    <Text style={{ fontSize: 14, color: '#8B97A8' }}>乳腺结节智能分割 · 教学课件</Text>
+    <Text style={{ fontSize: 14, color: '#1E4FA8' }}>18 / 21</Text>
+  </Box>
+</Slide>

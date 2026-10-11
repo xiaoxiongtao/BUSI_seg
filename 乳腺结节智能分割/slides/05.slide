@@ -1,0 +1,66 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', position: 'relative' }}>
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 8, background: '#1E4FA8' }} />
+  <Box style={{ position: 'absolute', top: 28, left: 40, width: 1200, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid #D6DCE5', paddingBottom: 16 }}>
+    <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#0E3F8C' }}>BUSI 数据集：780 例乳腺超声与像素级标注</Text>
+    <Box style={{ background: '#E8EFF8', borderRadius: 999, padding: '6px 18px' }}>
+      <Text style={{ fontSize: 16, color: '#1E4FA8' }}>01 任务与数据</Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', top: 116, left: 40, width: 470, flexDirection: 'column', gap: 18 }}>
+    <Box style={{ flexDirection: 'column' }}>
+      <Text style={{ fontSize: 130, fontWeight: 'bold', color: '#1E4FA8', lineHeight: 1 }}>780</Text>
+      <Text style={{ fontSize: 24, color: '#4A5568', marginTop: 4 }}>张乳腺超声图像（含医师标注 mask）</Text>
+    </Box>
+    <Box style={{ flexDirection: 'row', gap: 14 }}>
+      <Box style={{ flex: 1, background: '#F0F5FC', borderRadius: 10, padding: '14px 16px', border: '1px solid #D6DCE5' }}>
+        <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#0E3F8C' }}>437</Text>
+        <Text style={{ fontSize: 17, color: '#4A5568', marginTop: 2 }}>良性 benign</Text>
+      </Box>
+      <Box style={{ flex: 1, background: '#F0F5FC', borderRadius: 10, padding: '14px 16px', border: '1px solid #D6DCE5' }}>
+        <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#D9534F' }}>210</Text>
+        <Text style={{ fontSize: 17, color: '#4A5568', marginTop: 2 }}>恶性 malignant</Text>
+      </Box>
+      <Box style={{ flex: 1, background: '#F0F5FC', borderRadius: 10, padding: '14px 16px', border: '1px solid #D6DCE5' }}>
+        <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#4A5568' }}>133</Text>
+        <Text style={{ fontSize: 17, color: '#4A5568', marginTop: 2 }}>正常 normal</Text>
+      </Box>
+    </Box>
+    <Box style={{ background: '#E8EFF8', borderRadius: 10, padding: '16px 20px' }}>
+      <Text style={{ fontSize: 19, color: '#0E3F8C', lineHeight: 1.6 }}>
+        数据来源：Al-Dhabyani et al., <span style={{ fontStyle: 'italic' }}>Data in Brief</span>, 2020。
+        良 / 恶图像均带 <span style={{ fontWeight: 'bold' }}>_mask.png</span> 像素级真值；
+        normal 无病灶，训练中自动生成全 0 mask。
+      </Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', top: 116, left: 540, width: 700, height: 400, background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', padding: '18px 24px' }}>
+    <Chart
+      style={{ width: 652, height: 364 }}
+      chartType='doughnutChart'
+      title='BUSI 三类样本分布（共 780 张）'
+      titleColor='#1A2230'
+      showLegend={true}
+      showDataLabels={true}
+      legendColor='#4A5568'
+      dataLabelColor='#FFFFFF'
+      colors={['#1E4FA8', '#D9534F', '#8B97A8']}
+      background='#F7F9FC'
+      data={[
+        ['类别', '样本数'],
+        ['良性 benign', 437],
+        ['恶性 malignant', 210],
+        ['正常 normal', 133],
+      ]}
+    />
+  </Box>
+  <Box style={{ position: 'absolute', top: 540, left: 540, width: 700, background: '#0E3F8C', borderRadius: 12, padding: '18px 24px' }}>
+    <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#FFFFFF', lineHeight: 1.6 }}>
+      关键判断：病灶像素通常只占整图的极小部分，像素准确率（Accuracy）会"虚高"到 95% 以上——
+      因此本项目全程以 <span style={{ color: '#FFC107' }}>Dice / IoU</span> 作为模型选择与对比的核心指标。
+    </Text>
+  </Box>
+  <Box style={{ position: 'absolute', bottom: 0, left: 0, width: 1280, height: 50, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0 40px', borderTop: '1px solid #E5E7EB', background: '#F7F9FC' }}>
+    <Text style={{ fontSize: 14, color: '#8B97A8' }}>乳腺结节智能分割 · 教学课件</Text>
+    <Text style={{ fontSize: 14, color: '#1E4FA8' }}>05 / 21</Text>
+  </Box>
+</Slide>

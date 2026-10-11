@@ -1,0 +1,82 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', position: 'relative' }}>
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 8, background: '#1E4FA8' }} />
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 330, height: 670, background: '#0E3F8C' }}>
+    <Box style={{ position: 'absolute', top: 70, left: 40, width: 250, flexDirection: 'column', gap: 18 }}>
+      <Text style={{ fontSize: 20, color: '#9FB6DE', letterSpacing: 3 }}>03 分割网络</Text>
+      <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#FFFFFF', lineHeight: 1.3 }}>分割损失函数：BCE 与 Dice 的组合</Text>
+      <Box style={{ width: 56, height: 4, background: '#FFC107', marginTop: 6 }} />
+      <Text style={{ fontSize: 18, color: '#C9D7EE', lineHeight: 1.7, marginTop: 8 }}>
+        选择依据：病灶像素占比极小，逐像素损失会被背景"淹没"，
+        必须引入对前景区域敏感的 Dice 项。
+      </Text>
+      <Box style={{ background: 'rgba(255,255,255,0.12)', borderRadius: 10, padding: '14px 18px', marginTop: 8 }}>
+        <Text style={{ fontSize: 17, color: '#FFFFFF', lineHeight: 1.6 }}>
+          本项目默认：L = 0.5·L_BCE + 0.5·L_Dice，可经 --loss 参数切换。
+        </Text>
+      </Box>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', top: 56, left: 376, width: 864, flexDirection: 'column', gap: 14 }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'stretch', gap: 16, background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', padding: '14px 22px' }}>
+      <Box style={{ width: 130, justifyContent: 'center', alignItems: 'center', background: '#1E4FA8', borderRadius: 10 }}>
+        <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#FFFFFF' }}>BCE</Text>
+      </Box>
+      <Box style={{ flex: 1 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+          <Math latex={'L_{BCE} = -\\frac{1}{N}\\sum_{i=1}^{N}\\big[y_i\\log \\hat{p}_i + (1-y_i)\\log(1-\\hat{p}_i)\\big]'} width={430} color={'#1A2230'} />
+          <Text style={{ fontSize: 15, color: '#4A5568' }}>逐像素二分类交叉熵</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.5, marginTop: 4 }}>
+          优化稳定、梯度平滑；但背景像素占 95%+ 时，损失被易分背景主导，病灶区域学不充分。
+        </Text>
+      </Box>
+    </Box>
+    <Box style={{ flexDirection: 'row', alignItems: 'stretch', gap: 16, background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', padding: '14px 22px' }}>
+      <Box style={{ width: 130, justifyContent: 'center', alignItems: 'center', background: '#1E4FA8', borderRadius: 10 }}>
+        <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#FFFFFF' }}>Dice</Text>
+      </Box>
+      <Box style={{ flex: 1 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+          <Math latex={'L_{Dice} = 1 - \\frac{2|X \\cap Y|}{|X| + |Y|} = 1 - \\frac{2\\sum_i p_i g_i}{\\sum_i p_i + \\sum_i g_i}'} width={430} color={'#1A2230'} />
+          <Text style={{ fontSize: 15, color: '#4A5568' }}>soft Dice（可微）</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.5, marginTop: 4 }}>
+          直接优化"预测与真值的重合度"，只关心前景区域规模，天然对类别不平衡鲁棒——代价是梯度不如 BCE 稳定。
+        </Text>
+      </Box>
+    </Box>
+    <Box style={{ flexDirection: 'row', alignItems: 'stretch', gap: 16, background: '#F0F5FC', borderRadius: 12, border: '2px solid #1E4FA8', padding: '14px 22px' }}>
+      <Box style={{ width: 130, justifyContent: 'center', alignItems: 'center', background: '#0E3F8C', borderRadius: 10 }}>
+        <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#FFFFFF' }}>BCE+Dice</Text>
+        <Text style={{ fontSize: 14, color: '#FFC107' }}>默认</Text>
+      </Box>
+      <Box style={{ flex: 1 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+          <Math latex={'L = \\lambda_1 L_{BCE} + \\lambda_2 L_{Dice}, \\quad \\lambda_1 = \\lambda_2 = 0.5'} width={400} color={'#1A2230'} />
+          <Text style={{ fontSize: 15, color: '#1E4FA8' }}>两者取长补短</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#0E3F8C', lineHeight: 1.5, marginTop: 4 }}>
+          BCE 提供<span style={{ fontWeight: 'bold' }}>逐像素的稳定梯度</span>，Dice 提供<span style={{ fontWeight: 'bold' }}>区域级的重合度导向</span>——医学分割最常用的组合之一。
+        </Text>
+      </Box>
+    </Box>
+    <Box style={{ flexDirection: 'row', alignItems: 'stretch', gap: 16, background: '#F7F9FC', borderRadius: 12, border: '1px solid #D6DCE5', padding: '14px 22px' }}>
+      <Box style={{ width: 130, justifyContent: 'center', alignItems: 'center', background: '#3D7BD9', borderRadius: 10 }}>
+        <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#FFFFFF' }}>Focal</Text>
+      </Box>
+      <Box style={{ flex: 1 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+          <Math latex={'L_{FL} = -(1-\\hat{p}_t)^{\\gamma}\\,\\log(\\hat{p}_t)'} width={280} color={'#1A2230'} />
+          <Text style={{ fontSize: 15, color: '#4A5568' }}>γ 为聚焦参数（常取 2）</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.5, marginTop: 4 }}>
+          在 BCE 上乘调制因子，把权重集中到<span style={{ fontWeight: 'bold' }}>难分样本</span>（如边界模糊的恶性病灶边缘）。
+        </Text>
+      </Box>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', bottom: 0, left: 0, width: 1280, height: 50, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0 40px', borderTop: '1px solid #E5E7EB', background: '#F7F9FC' }}>
+    <Text style={{ fontSize: 14, color: '#8B97A8' }}>乳腺结节智能分割 · 教学课件</Text>
+    <Text style={{ fontSize: 14, color: '#1E4FA8' }}>15 / 21</Text>
+  </Box>
+</Slide>
